@@ -1,5 +1,4 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Home from "../components/Home.vue";
 import Dashboard from "../components/Dashboard.vue";
 import NotFound from "../views/NotFound.vue";
@@ -9,8 +8,6 @@ import Login from "../components/Login";
 import LoginComplete from "../components/LoginComplete";
 import Profile from "../components/Profile";
 import store from "../store";
-
-Vue.use(VueRouter);
 
 const routes = [
   {
@@ -58,15 +55,14 @@ const routes = [
     }
   },
   {
-    path: "*",
+    path: "/:pathMatch(.*)*",
     name: "Not Found",
     component: NotFound
   }
 ];
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes
 });
 

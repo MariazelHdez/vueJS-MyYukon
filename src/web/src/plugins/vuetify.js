@@ -1,16 +1,18 @@
-import Vue from "vue";
-import Vuetify from "vuetify";
-import "vuetify/dist/vuetify.min.css";
+import "vuetify/styles";
 import "../assets/yk-style.css";
 
-Vue.use(Vuetify);
-export default new Vuetify({
+import { createVuetify } from "vuetify";
+
+export default createVuetify({
     theme: {
+        defaultTheme: "light",
         themes: {
             light: {
-                primary: "#0097a9",
-                secondary: "#fff",
-                anchor: "#00818f",
+                colors: {
+                    primary: "#0097a9",
+                    secondary: "#fff",
+                    anchor: "#00818f",
+                }
             }
         }
     }
