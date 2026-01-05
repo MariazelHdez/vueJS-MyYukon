@@ -98,7 +98,7 @@
 
 <script>
 export default {
-  name: "Form",
+  name: "BasicForm",
   data: () => ({
     form1Valid: true,
     firstName: "",

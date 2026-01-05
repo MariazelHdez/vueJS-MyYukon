@@ -18,6 +18,11 @@ export const FRONTEND_URL = process.env.FRONTEND_URL || "";
 export const AUTH_REDIRECT = process.env.AUTH_REDIRECT || process.env.FRONTEND_URL || "";
 export const NODE_ENV = process.env.NODE_ENV;
 
+export const AUTH_SECRET = process.env.AUTH_SECRET || "supersecret";
+export const AUTH_CLIENT_ID = process.env.AUTH_CLIENT_ID || "client-id";
+export const AUTH_ISSUER_BASE_URL = process.env.AUTH_ISSUER_BASE_URL || "https://example.com";
+export const AUTH_BASE_URL = process.env.AUTH_BASE_URL || `http://localhost:${API_PORT}`;
+
 export const DB_NAME = process.env.DB_NAME || "postgres";
 export const DB_USER = process.env.DB_USER || "postgres";
 export const DB_PASS = process.env.DB_PASS || "password";
