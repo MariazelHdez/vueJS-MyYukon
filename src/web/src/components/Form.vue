@@ -4,17 +4,17 @@
 
     <v-banner icon="mdi-cash-register">
       <h2>Form help</h2>
-      Help text can go in here to make the form more</v-banner
-    >
+      Help text can go in here to make the form more
+    </v-banner>
 
     <p></p>
     <v-form v-model="form1Valid">
       <div class="row">
         <div class="col-6">
           <v-text-field
-            dense
+            density="compact"
             v-model="firstName"
-            outlined
+            variant="outlined"
             label="First name (required)"
             required
             :rules="firstNameRules"
@@ -22,9 +22,9 @@
         </div>
         <div class="col-6">
           <v-text-field
-            dense
+            density="compact"
             v-model="lastName"
-            outlined
+            variant="outlined"
             label="Last name (required)"
             required
             :rules="lastNameRules"
@@ -33,19 +33,19 @@
       </div>
       <v-text-field
         v-model="email"
-        dense
-        outlined
+        density="compact"
+        variant="outlined"
         label="Email (required)"
         required
         :rules="emailRules"
       ></v-text-field>
 
-      <v-textarea outlined label="Skills">This is the text</v-textarea>
+      <v-textarea variant="outlined" label="Skills">This is the text</v-textarea>
 
       <v-select
         v-model="team"
-        outlined
-        dense
+        variant="outlined"
+        density="compact"
         label="Choose a team (required)"
         hint="Seahawks is the correct answer"
         persistent-hint
@@ -56,28 +56,26 @@
       ></v-select>
 
       <v-card>
-        <v-tabs v-model="tab" background-color="#fff2d5" color="primary">
-          <v-tab key="1">
-            Tab item 1
-          </v-tab>
-          <v-tab key="2">
-            Tab item 2
-          </v-tab>
+        <v-tabs v-model="tab" bg-color="#fff2d5" color="primary">
+          <v-tab value="1">Tab item 1</v-tab>
+          <v-tab value="2">Tab item 2</v-tab>
         </v-tabs>
-        <v-tabs-items v-model="tab" style="height: 250px; padding: 20px">
-          <v-tab-item key="1">
-            <v-card>
+        <v-window v-model="tab" class="pa-4" style="height: 250px">
+          <v-window-item value="1">
+            <v-card class="pa-4">
               This is cool info about tab item 1
             </v-card>
-          </v-tab-item>
-          <v-tab-item key="2">
-            This is cool info about tab item 2
-          </v-tab-item>
-        </v-tabs-items>
+          </v-window-item>
+          <v-window-item value="2">
+            <v-card class="pa-4">
+              This is cool info about tab item 2
+            </v-card>
+          </v-window-item>
+        </v-window>
       </v-card>
     </v-form>
 
-    <v-banner :hidden="!showError" icon="mdi-alert-circle" class="problem mt-4">
+    <v-banner v-show="showError" icon="mdi-alert-circle" class="problem mt-4">
       <h3>There is a problem</h3>
       <span>That's not the right team!</span>
     </v-banner>
@@ -91,8 +89,8 @@
     >
     <v-btn color="secondary">Cancel</v-btn>
 
-    <v-snackbar v-model="snackbar" right color="success">
-      <v-icon class="mr-3">mdi-thumb-up-outline</v-icon>
+    <v-snackbar v-model="snackbar" location="top right" color="success">
+      <v-icon class="mr-3" icon="mdi-thumb-up-outline"></v-icon>
       {{ apiSuccess }}
     </v-snackbar>
   </div>
@@ -125,7 +123,7 @@ export default {
     team: "",
     teamRules: [v => !!v || "Team is required"],
     teams: ["Seahawks", "Patriots", "Chiefs"],
-    tab: 1,
+    tab: "1",
     showError: null,
     snackbar: null,
     apiSuccess: ""
