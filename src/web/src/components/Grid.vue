@@ -10,13 +10,12 @@
     <v-text-field v-model="search" label="Search"></v-text-field>
 
     <v-data-table
-      dense
+      density="compact"
       :items="items"
       :headers="headers"
-      :options.sync="options"
+      v-model:options="options"
       :loading="loading"
-      :server-items-length="totalLength"      
-      :search="search"
+      :items-length="totalLength"
     ></v-data-table>
   </div>
 </template>
@@ -30,7 +29,7 @@ export default {
     loading: false,
     items: [],
     search: "",
-    options: {},
+    options: { page: 1, itemsPerPage: 10, sortBy: [] },
     totalLength: 0,
     headers: [
       { text: "id", value: "id" },
@@ -38,7 +37,6 @@ export default {
     ],
     page: 1,
     pageCount: 0,
-    iteamsPerPage: 10,
   }),
   watch: {
     options: {
