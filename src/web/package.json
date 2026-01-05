@@ -23,8 +23,8 @@
     "@vue/cli-plugin-vuex": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
     "@vue/compiler-sfc": "^3.4.38",
+    "@babel/eslint-parser": "^7.25.9",
     "@vue/eslint-config-prettier": "^7.0.0",
-    "babel-eslint": "^10.1.0",
     "eslint": "^8.21.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^9.3.0"
@@ -32,14 +32,18 @@
   "eslintConfig": {
     "root": true,
     "env": {
+      "browser": true,
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/vue3-essential",
       "eslint:recommended"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser",
+      "requireConfigFile": false,
+      "ecmaVersion": 2020,
+      "sourceType": "module"
     },
     "rules": {
       "vue/multi-word-component-names": [
