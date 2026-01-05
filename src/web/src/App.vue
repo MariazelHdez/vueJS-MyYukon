@@ -1,34 +1,25 @@
 <template>
   <v-app>
     <v-navigation-drawer
-      v-bind:app="hasSidebar"
+      v-if="hasSidebar"
+      expand-on-hover
+      rail
       permanent
-      :expand-on-hover="hasSidebarClosable"
-      clipped
       color="#f1f1f1"
-      v-bind:class="{ 'd-none': !hasSidebar }"
     >
-      <v-list dense nav style="" class="mt-4">
+      <v-list density="comfortable" nav class="mt-4">
         <v-list-item
           link
-          nav
-          v-bind:title="section.name"
-          v-bind:to="section.url"
+          :title="section.name"
+          :to="section.url"
           v-for="section in sections"
-          v-bind:key="section.name"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ section.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{ section.name }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          :key="section.name"
+          :prepend-icon="section.icon"
+        />
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar
-      app
       color="#fff"
       flat
       height="70"
@@ -61,27 +52,17 @@
 
       <div v-if="isAuthenticated">
         <span>{{ username }}</span>
-        <v-menu bottom left class="ml-0">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn icon color="primary" v-bind="attrs" v-on="on">
-              <v-icon>mdi-dots-vertical</v-icon>
+        <v-menu location="bottom" class="ml-0">
+          <template #activator="{ props }">
+            <v-btn icon color="primary" v-bind="props">
+              <v-icon icon="mdi-dots-vertical"></v-icon>
             </v-btn>
           </template>
 
-          <v-list dense style="min-width: 200px">
-            <v-list-item to="/profile">
-              <v-list-item-icon>
-                <v-icon>mdi-account</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>My profile</v-list-item-title>
-            </v-list-item>
+          <v-list density="comfortable" style="min-width: 200px">
+            <v-list-item to="/profile" link :prepend-icon="'mdi-account'" title="My profile" />
             <v-divider />
-            <v-list-item @click="signOut">
-              <v-list-item-icon>
-                <v-icon>mdi-exit-run</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Sign out</v-list-item-title>
-            </v-list-item>
+            <v-list-item @click="signOut" link :prepend-icon="'mdi-exit-run'" title="Sign out" />
           </v-list>
         </v-menu>
       </div>
@@ -107,16 +88,13 @@
 
 <script>
 import router from "./router";
-//import { mapState } from "vuex";
 import store from "./store";
 import * as config from "./config";
-import { mapState } from "vuex";
 
 export default {
   name: "App",
   components: {},
   computed: {
-    ...mapState("isAuthenticated"),
     username() {
       return store.getters.fullName;
     },
