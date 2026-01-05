@@ -1,13 +1,13 @@
 import { Express, NextFunction, Request, Response } from "express"
 import * as ExpressSession from "express-session";
 import { AuthUser } from "../models/auth";
-import { AUTH_REDIRECT, FRONTEND_URL } from "../config";
+import { AUTH_BASE_URL, AUTH_CLIENT_ID, AUTH_ISSUER_BASE_URL, AUTH_REDIRECT, AUTH_SECRET, FRONTEND_URL } from "../config";
 
 const {auth} = require('express-openid-connect')
 
 export function configureAuthentication(app: Express) {
   app.use(ExpressSession.default({
-      secret: 'supersecret',
+      secret: AUTH_SECRET,
       resave: true,
       saveUninitialized: true
   }));
@@ -20,6 +20,10 @@ export function configureAuthentication(app: Express) {
           audience: '',
           scope: 'openid profile email',
       },
+      baseURL: AUTH_BASE_URL,
+      clientID: AUTH_CLIENT_ID,
+      issuerBaseURL: AUTH_ISSUER_BASE_URL,
+      secret: AUTH_SECRET,
       routes: {
           login: "/api/auth/login",
           //logout: "/api/auth/logout",
