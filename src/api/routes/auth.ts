@@ -1,18 +1,42 @@
 import { Express, NextFunction, Request, Response } from "express"
 import * as ExpressSession from "express-session";
 import { AuthUser } from "../models/auth";
-import { AUTH_REDIRECT, FRONTEND_URL } from "../config";
+import {
+  AUTH_REDIRECT,
+  AUTH0_BASE_URL,
+  AUTH0_CLIENT_ID,
+  AUTH0_CLIENT_SECRET,
+  AUTH0_ISSUER_BASE_URL,
+  AUTH0_SECRET,
+  FRONTEND_URL,
+} from "../config";
 
 const {auth} = require('express-openid-connect')
 
 export function configureAuthentication(app: Express) {
+  if (!AUTH0_SECRET || !AUTH0_CLIENT_ID || !AUTH0_ISSUER_BASE_URL || !AUTH0_BASE_URL) {
+      const missing = [
+          ["SECRET", AUTH0_SECRET],
+          ["CLIENT_ID", AUTH0_CLIENT_ID],
+          ["ISSUER_BASE_URL", AUTH0_ISSUER_BASE_URL],
+          ["BASE_URL", AUTH0_BASE_URL],
+      ].filter(([, value]) => !value).map(([key]) => key);
+
+      throw new Error(`Missing required Auth0 environment variables: ${missing.join(", ")}`);
+  }
+
   app.use(ExpressSession.default({
-      secret: 'supersecret',
+      secret: AUTH0_SECRET,
       resave: true,
       saveUninitialized: true
   }));
 
   app.use(auth({
+      secret: AUTH0_SECRET,
+      baseURL: AUTH0_BASE_URL,
+      clientID: AUTH0_CLIENT_ID,
+      clientSecret: AUTH0_CLIENT_SECRET,
+      issuerBaseURL: AUTH0_ISSUER_BASE_URL,
       authRequired: false,
       auth0Logout: false,
       authorizationParams: {
