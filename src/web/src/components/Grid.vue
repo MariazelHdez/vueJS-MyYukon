@@ -9,14 +9,15 @@
     </v-banner>
     <v-text-field v-model="search" label="Search"></v-text-field>
 
-    <v-data-table
+    <v-data-table-server
       density="compact"
       :items="items"
       :headers="headers"
       v-model:options="options"
       :loading="loading"
       :items-length="totalLength"
-    ></v-data-table>
+      item-value="id"
+    ></v-data-table-server>
   </div>
 </template>
 
@@ -32,8 +33,8 @@ export default {
     options: { page: 1, itemsPerPage: 10, sortBy: [] },
     totalLength: 0,
     headers: [
-      { text: "id", value: "id" },
-      { text: "name", value: "name" },
+      { title: "id", key: "id" },
+      { title: "name", key: "name" }
     ],
     page: 1,
     pageCount: 0,
