@@ -3,11 +3,11 @@
     <h1>My Profile</h1>
     <p>** This information is all read-only</p>
 
-    <div class="row ">
+    <div class="row">
       <div class="col-md-6 mb-3">
         <v-text-field
           v-model="firstName"
-          outlined
+          variant="outlined"
           label="First name"
           readonly
           hide-details
@@ -16,7 +16,7 @@
       <div class="col-md-6 mb-3">
         <v-text-field
           v-model="lastName"
-          outlined
+          variant="outlined"
           label="Last name"
           readonly
           hide-details
@@ -26,7 +26,7 @@
       <div class="col-md-6 mb-3">
         <v-text-field
           v-model="email"
-          outlined
+          variant="outlined"
           label="Email"
           readonly
           hide-details
@@ -35,7 +35,7 @@
       <div class="col-md-6 mb-3">
         <v-text-field
           v-model="username"
-          outlined
+          variant="outlined"
           label="Username"
           readonly
           hide-details

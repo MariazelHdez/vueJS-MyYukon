@@ -40,7 +40,12 @@
         :rules="emailRules"
       ></v-text-field>
 
-      <v-textarea variant="outlined" label="Skills">This is the text</v-textarea>
+      <v-textarea
+        v-model="skills"
+        variant="outlined"
+        label="Skills"
+        placeholder="This is the text"
+      ></v-textarea>
 
       <v-select
         v-model="team"
@@ -126,7 +131,8 @@ export default {
     tab: "1",
     showError: null,
     snackbar: null,
-    apiSuccess: ""
+    apiSuccess: "",
+    skills: ""
   }),
   methods: {
     saveForm() {
